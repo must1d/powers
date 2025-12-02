@@ -16,6 +16,10 @@ Perfect for creating chatbots, automation agents, data analysis assistants, and 
 
 **No complex setup required** - works with Bedrock out of the box, or add your preferred provider with a simple pip install.
 
+## CRITICAL: Always Read Getting Started Guide
+
+**BEFORE using this power or creating any agent code, you MUST read the getting-started.md steering file.** This contains the correct API usage, proper method names, and essential patterns. Use `kiroPowers` with action="readSteering", powerName="strands", steeringFile="getting-started.md" to access it.
+
 ## Available Steering Files
 
 This power includes a comprehensive getting-started guide:
@@ -26,90 +30,35 @@ This power includes a comprehensive getting-started guide:
 
 ### strands-agents
 **Package:** `strands-agents-mcp-server`
-**Tools:** get_documentation, search_documentation, list_topics
 
-1. **get_documentation** - Get detailed documentation for specific topics
-   - Required: `topic` (string) - Topic name (e.g., "quickstart", "tools", "models")
-   - Returns: Complete documentation content
+1. **search_docs** - Search curated documentation and return ranked results with snippets
+   - Required: `query` (string) - Search query (e.g., "bedrock model", "how to use tools")
+   - Optional: `k` (integer) - Maximum number of results to return (default: 5)
+   - Returns: List of documents with URL, title, relevance score, and content snippet
 
-2. **search_documentation** - Search documentation for specific terms
-   - Required: `query` (string) - Search query
-   - Returns: Relevant documentation sections
-
-3. **list_topics** - List all available documentation topics
-   - No parameters required
-   - Returns: Array of available topic names
+2. **fetch_doc** - Fetch full document content by URL
+   - Optional: `uri` (string) - Document URI (http/https URL). If empty, returns all available URLs
+   - Returns: Full document with URL, title, and complete text content
 
 ## Tool Usage Examples
 
-### Get Quickstart Documentation
+### Search Documentation
 
 ```javascript
-usePower("strands", "strands-agents", "get_documentation", {
-  "topic": "quickstart"
+usePower("strands", "strands-agents", "search_docs", {
+  "query": "how to create custom tools",
+  "k": 3
 })
-// Returns: Complete quickstart guide with installation and first agent example
+// Returns: Top 3 relevant documentation sections about creating tools
 ```
 
-### Search for Specific Features
+### Fetch Complete Documentation
 
 ```javascript
-usePower("strands", "strands-agents", "search_documentation", {
-  "query": "caching system prompts"
+usePower("strands", "strands-agents", "fetch_doc", {
+  "uri": "https://docs.strands.ai/user-guide/tools"
 })
-// Returns: Documentation sections about prompt caching
-```
-
-### List Available Topics
-
-```javascript
-usePower("strands", "strands-agents", "list_topics", {})
-// Returns: ["quickstart", "tools", "models", "bedrock", "anthropic", "openai", "gemini", "llamaapi", ...]
-```
-
-## Common Workflows
-
-### Build a Basic Agent
-
-```javascript
-// 1. Get quickstart documentation
-const quickstart = usePower("strands", "strands-agents", "get_documentation", {
-  "topic": "quickstart"
-})
-
-// 2. Create agent.py file with basic agent code
-// 3. Install dependencies: pip install strands-agents strands-agents-tools
-// 4. Run the agent: python agent.py
-```
-
-### Build Agent with Specific Provider
-
-```javascript
-// 1. Search for provider documentation
-const providerDocs = usePower("strands", "strands-agents", "search_documentation", {
-  "query": "anthropic setup"
-})
-
-// 2. Get detailed provider documentation
-const anthropicDocs = usePower("strands", "strands-agents", "get_documentation", {
-  "topic": "anthropic"
-})
-
-// 3. Create agent with provider-specific configuration
-// 4. Install: pip install 'strands-agents[anthropic]' strands-agents-tools
-```
-
-### Add Custom Tools to Agent
-
-```javascript
-// 1. Get tools documentation
-const toolsDocs = usePower("strands", "strands-agents", "get_documentation", {
-  "topic": "tools"
-})
-
-// 2. Review tool creation patterns
-// 3. Implement custom tools with @tool decorator
-// 4. Add tools to agent initialization
+// Returns: Complete documentation page about tools
 ```
 
 ## Best Practices
