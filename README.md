@@ -1,10 +1,10 @@
-# Kiro Powers Repository
+# Kiro powers repository
 
-Collection of Kiro Powers for enhanced AI agent capabilities. Each power provides specialized tools and workflows for specific development tasks.
+Collection of Kiro powers for enhanced AI agent capabilities. Each power provides specialized tools and workflows for specific development tasks.
 
 Documentation is available at https://kiro.dev/docs/powers/
 
-## Available Powers
+## Available powers
 
 ### aurora-dsql
 **Deploy a distributed SQL database on AWS** - PostgreSQL-compatible serverless distributed SQL database with Aurora DSQL - manage schemas, execute queries, and handle migrations with DSQL-specific constraints.
@@ -70,7 +70,7 @@ Documentation is available at https://kiro.dev/docs/powers/
 ---
 
 ### power-builder
-**Power Builder** - Complete guide for building and testing new Kiro Powers with templates, best practices, and validation.
+**Power Builder** - Complete guide for building and testing new Kiro powers with templates, best practices, and validation.
 
 **MCP Servers:** None (Knowledge Base Power)
 
